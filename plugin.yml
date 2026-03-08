@@ -1,0 +1,16 @@
+name: bedrockranked
+main: BedrockRanked\Main
+version: 1.0.0
+api: 5.0.0
+author: ZyberPE
+
+commands:
+  break:
+    description: Break bedrock you are looking at
+    usage: "/break"
+    permission: bedrock.rank
+
+permissions:
+  bedrock.rank:
+    description: Allows player to break bedrock
+    default: op
