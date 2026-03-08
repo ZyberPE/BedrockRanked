@@ -1,0 +1,5 @@
+messages:
+  no-permission: "§cYou do not have permission to use this command."
+  must-look-bedrock: "§cYou must be looking at bedrock."
+  success: "§aYou broke bedrock and received it."
+  dropped: "§eYour inventory was full so the bedrock dropped on the ground."
