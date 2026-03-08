@@ -8,7 +8,6 @@ use pocketmine\command\CommandSender;
 use pocketmine\player\Player;
 
 use pocketmine\block\VanillaBlocks;
-use pocketmine\item\VanillaItems;
 
 class Main extends PluginBase{
 
@@ -29,12 +28,7 @@ class Main extends PluginBase{
 
         $target = $sender->getTargetBlock(5);
 
-        if($target === null || !$target->getTypeId() === VanillaBlocks::BEDROCK()->getTypeId()){
-            $sender->sendMessage($this->getConfig()->get("messages")["must-look-bedrock"]);
-            return true;
-        }
-
-        if($target->getTypeId() !== VanillaBlocks::BEDROCK()->getTypeId()){
+        if($target === null || $target->getTypeId() !== VanillaBlocks::BEDROCK()->getTypeId()){
             $sender->sendMessage($this->getConfig()->get("messages")["must-look-bedrock"]);
             return true;
         }
@@ -44,15 +38,15 @@ class Main extends PluginBase{
 
         $world->setBlock($pos, VanillaBlocks::AIR());
 
-        $item = VanillaItems::BEDROCK();
+        $item = VanillaBlocks::BEDROCK()->asItem();
 
-        $inv = $sender->getInventory();
+        $inventory = $sender->getInventory();
 
-        if($inv->canAddItem($item)){
-            $inv->addItem($item);
+        if($inventory->canAddItem($item)){
+            $inventory->addItem($item);
             $sender->sendMessage($this->getConfig()->get("messages")["success"]);
         }else{
-            $world->dropItem($sender->getPosition(), $item);
+            $world->dropItem($pos, $item);
             $sender->sendMessage($this->getConfig()->get("messages")["dropped"]);
         }
 
